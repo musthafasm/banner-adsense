@@ -1,0 +1,43 @@
+{
+  "name": "perfomatix/banner-adsense",
+  "type": "wordpress-theme",
+  "description": "An advanced image widget for placing multiple banner images or ads.",
+  "homepage": "http://www.perfomatix.com",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Perfomatix",
+      "homepage": "http://www.perfomatix.com"
+    }
+  ],
+  "scripts": {
+    "phpcs": "./vendor/bin/phpcs --standard=phpcs.xml",
+    "phpcbf": "./vendor/bin/phpcbf .",
+    "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon  --memory-limit=2g",
+    "phpunit": "./vendor/bin/phpunit --configuration phpunit.xml",
+    "coverage": "./vendor/bin/coverage-check ./build/clover.xml 90",
+    "make-pot": "wp i18n make-pot . languages/atom.pot",
+    "make-dist": "wp dist-archive ."
+  },
+  "require": {
+    "php": ">=5.6",
+    "composer/installers": "^2.0"
+  },
+  "require-dev": {
+    "phpcompatibility/phpcompatibility-wp": "^2.1",
+    "wp-cli/i18n-command": "^2.2",
+    "wp-cli/dist-archive-command": "^2.0",
+    "wp-coding-standards/wpcs": "^2.3",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
+    "szepeviktor/phpstan-wordpress": "^1.0",
+    "phpunit/phpunit": "^6.0",
+    "10up/wp_mock": "^0.3.0",
+    "rregeer/phpunit-coverage-check": "^0.3.1"
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}

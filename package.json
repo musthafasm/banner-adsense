@@ -1,0 +1,17 @@
+{
+	"name": "banner-adsense",
+	"version": "1.0.0",
+	"description": "An advanced image widget for placing multiple banner images or ads.",
+	"author": "Perfomatix",
+	"license": "MIT",
+	"homepage": "http://www.perfomatix.com",
+	"devDependencies": {
+	  "@wordpress/scripts": "^9"
+	},
+	"scripts": {
+	  "fix-css": "stylelint '*.css' --fix -q",
+	  "fix-js": "wp-scripts format-js ./assets/js",
+	  "check-css": "wp-scripts lint-style '*.css'",
+	  "check-js": "wp-scripts lint-js 'assets/js/*.js'"
+	}
+  }

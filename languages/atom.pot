@@ -1,0 +1,79 @@
+# Copyright (C) 2022 Perfomatix
+# This file is distributed under the MIT.
+msgid ""
+msgstr ""
+"Project-Id-Version: Banner Adsense 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/banner-adsense\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-02-17T00:35:09+05:30\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.6.0\n"
+"X-Domain: banner-adsense\n"
+
+#. Plugin Name of the plugin
+#: includes/class-widget.php:28
+msgid "Banner Adsense"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+msgid "http://www.perfomatix.com"
+msgstr ""
+
+#. Description of the plugin
+#: includes/class-widget.php:29
+msgid "An advanced image widget for placing multiple banner images or ads."
+msgstr ""
+
+#. Author of the plugin
+msgid "Perfomatix"
+msgstr ""
+
+#: includes/class-banner-adsense.php:215
+msgid "Choose or Upload PDF"
+msgstr ""
+
+#: includes/class-banner-adsense.php:216
+msgid "Use this document"
+msgstr ""
+
+#: includes/class-widget.php:129
+msgid "Title:"
+msgstr ""
+
+#: includes/class-widget.php:134
+#: includes/class-widget.php:192
+msgid "Script:"
+msgstr ""
+
+#: includes/class-widget.php:149
+msgid "Add Image"
+msgstr ""
+
+#: includes/class-widget.php:183
+msgid "Link:"
+msgstr ""
+
+#: includes/class-widget.php:186
+msgid "Open Link In:"
+msgstr ""
+
+#: includes/class-widget.php:188
+msgid "Same Window"
+msgstr ""
+
+#: includes/class-widget.php:189
+msgid "New Window"
+msgstr ""
+
+#: includes/class-widget.php:195
+msgid "Add / Edit Image"
+msgstr ""
+
+#: includes/class-widget.php:195
+msgid "Remove Image"
+msgstr ""

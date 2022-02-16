@@ -1,0 +1,55 @@
+name: Analyse Coding Standards
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Analyse Coding Standards
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+      - name: Cache Node modules
+        id: cache-node-modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Check PHP Coding Standards
+        run: composer run-script phpcs
+
+      - name: Check PHP Static Analysis
+        run: composer run-script phpstan
+
+      - name: Install Node.js dependencies
+        run: npm install --silent --no-progress
+
+      - name: Check CSS Coding Standards
+        run: npm run check-css
+
+      - name: Check JS Coding Standards
+        run: npm run check-js

@@ -1,0 +1,47 @@
+# Composer
+vendor
+composer.json
+composer.lock
+composer.phar
+
+# Node
+node_modules
+package.json
+package-lock.json
+
+# OS and IDE
+*~
+*.bak
+Thumbs.db
+desktop.ini
+.buildpath
+.project
+.settings
+*.tmproj
+git_impact.sh
+cache.properties
+nbproject/
+.php_cs.cache
+._.DS_Store
+.DS_Store
+.vscode
+
+# random stuff
+tests
+build
+bin
+.travis.yml
+.git
+.gitattributes
+.github
+.distignore
+gulpfile.js
+.editorconfig
+.gitignore
+.eslintrc
+.stylelintrc
+CHANGELOG.md
+README.md
+phpstan.neon
+phpcs.xml
+phpunit.xml

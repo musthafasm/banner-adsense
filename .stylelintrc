@@ -1,0 +1,11 @@
+{
+    "extends": [
+        "stylelint-config-wordpress"
+    ],
+    "rules": {
+        "no-descending-specificity": null,
+        "no-duplicate-selectors": null,
+      	"at-rule-no-unknown": null,
+      	"selector-attribute-quotes": null
+    }
+}
