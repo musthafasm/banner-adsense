@@ -17,7 +17,7 @@
     "phpunit": "./vendor/bin/phpunit --configuration phpunit.xml",
     "coverage": "./vendor/bin/coverage-check ./build/clover.xml 90",
     "make-pot": "wp i18n make-pot . languages/atom.pot",
-    "make-dist": "wp dist-archive ."
+    "make-dist": "wp dist-archive . ././banner-adsense.zip"
   },
   "require": {
     "php": ">=5.6",
