@@ -49,7 +49,7 @@ jobs:
 
       - name: Create Release Asset
         id: create-release-asset
-        uses: actions/create-release-asset@v1
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
