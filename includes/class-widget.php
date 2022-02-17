@@ -53,10 +53,10 @@ class Widget extends \WP_Widget {
 		$widget_id = uniqid( 'banner-adsense-' );
 
 		if ( ! empty( $script ) ) {
-			wp_enqueue_script( $widget_id, esc_url( $script ) ); //phpcs:ignore WordPress.WP.EnqueuedResourceParameters
+			wp_enqueue_script( $widget_id, esc_url( $script ), array(), null ); //phpcs:ignore WordPress.WP.EnqueuedResourceParameters
 		}
 
-		$html .= '<div class="banner-adsense-images">';
+		$html .= '<ul class="banner-adsense-images">';
 
 		foreach ( $images as $key => $image ) {
 			if ( ! empty( $image['imgid'] ) ) {
@@ -65,18 +65,18 @@ class Widget extends \WP_Widget {
 				$target    = ! empty( $image['target'] ) ? '_blank' : '';
 
 				if ( ! empty( $image['geocode'] ) ) {
-					wp_enqueue_script( $widget_id . '-' . $key, esc_url( $image['geocode'] ) ); //phpcs:ignore WordPress.WP.EnqueuedResourceParameters
+					wp_enqueue_script( $widget_id . '-' . $key, esc_url( $image['geocode'] ), array(), null ); //phpcs:ignore WordPress.WP.EnqueuedResourceParameters
 				}
 
-				$html .= '<p>';
+				$html .= '<li>';
 				$html .= ! empty( $image['link'] ) ? '<a target="' . $target . '" href="' . esc_url( $image['link'] ) . '">' : '';
 				$html .= '<img style="max-width:100%;height:auto;" class="banner-adsense-image-img" alt="" src="' . esc_url( $image_url ) . '"/>';
 				$html .= ! empty( $image['link'] ) ? '</a>' : '';
-				$html .= '</p>';
+				$html .= '</li>';
 			}
 		}
 
-		$html .= '</div>';
+		$html .= '</ul>';
 		$html .= $args['after_widget'];
 
 		echo $html; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
