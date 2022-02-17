@@ -1,6 +1,7 @@
 {
   "name": "perfomatix/banner-adsense",
   "type": "wordpress-theme",
+  "version": "1.0.1",
   "description": "An advanced image widget for placing multiple banner images or ads.",
   "homepage": "http://www.perfomatix.com",
   "license": "MIT",

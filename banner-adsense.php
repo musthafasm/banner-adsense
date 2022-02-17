@@ -3,13 +3,13 @@
  * Banner Adsense - An advanced image widget for placing multiple banner images or ads.
  *
  * @package             BannerAdsense
- * @version             1.0.0
+ * @version             1.0.1
  *
  * @wordpress-plugin
  * Plugin Name:         Banner Adsense
  * Plugin URI:          http://www.perfomatix.com
  * Description:         An advanced image widget for placing multiple banner images or ads.
- * Version:             1.0.0
+ * Version:             1.0.1
  * Author:              Perfomatix
  * Author URI:          http://www.perfomatix.com
  * License:             MIT
@@ -69,7 +69,7 @@ function banner_adsense_load_self() {
 		->set_basename( plugin_basename( __FILE__ ) )
 		->set_path( plugin_dir_path( __FILE__ ) )
 		->set_url( plugin_dir_url( __FILE__ ) )
-		->set_version( '1.0.0' )
+		->set_version( '1.0.1' )
 		->init();
 
 	if ( is_admin() ) {
