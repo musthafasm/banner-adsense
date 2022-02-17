@@ -27,6 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Include the class files.
 require_once 'includes/class-banner-adsense.php';
+require_once 'includes/class-admin-settings.php';
 require_once 'includes/class-widget.php';
 
 // Call after plugin activation.

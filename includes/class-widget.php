@@ -50,20 +50,25 @@ class Widget extends \WP_Widget {
 			$html .= $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
 		}
 
+		$widget_id = uniqid( 'banner-adsense-' );
+
 		if ( ! empty( $script ) ) {
-			$html .= $script;
+			wp_enqueue_script( $widget_id, esc_url( $script ) ); //phpcs:ignore WordPress.WP.EnqueuedResourceParameters
 		}
 
 		$html .= '<div class="banner-adsense-images">';
 
-		foreach ( $images as $image ) {
+		foreach ( $images as $key => $image ) {
 			if ( ! empty( $image['imgid'] ) ) {
 				$imgsrc    = wp_get_attachment_image_src( $image['imgid'], 'full', false );
 				$image_url = ( ! empty( $imgsrc[0] ) && '' !== $imgsrc[0] ) ? $imgsrc[0] : '';
 				$target    = ! empty( $image['target'] ) ? '_blank' : '';
 
+				if ( ! empty( $image['geocode'] ) ) {
+					wp_enqueue_script( $widget_id . '-' . $key, esc_url( $image['geocode'] ) ); //phpcs:ignore WordPress.WP.EnqueuedResourceParameters
+				}
+
 				$html .= '<p>';
-				$html .= ! empty( $image['geocode'] ) ? $image['geocode'] : '';
 				$html .= ! empty( $image['link'] ) ? '<a target="' . $target . '" href="' . esc_url( $image['link'] ) . '">' : '';
 				$html .= '<img style="max-width:100%;height:auto;" class="banner-adsense-image-img" alt="" src="' . esc_url( $image_url ) . '"/>';
 				$html .= ! empty( $image['link'] ) ? '</a>' : '';
@@ -91,7 +96,7 @@ class Widget extends \WP_Widget {
 		$instance = $old_instance;
 
 		$instance['title']  = wp_strip_all_tags( $new_instance['title'] );
-		$instance['script'] = $new_instance['script'];
+		$instance['script'] = esc_url( $new_instance['script'] );
 		$instance['images'] = array();
 
 		if ( ! empty( $new_instance['imgid'] ) ) {
@@ -100,7 +105,7 @@ class Widget extends \WP_Widget {
 				if ( ! empty( $value ) ) {
 					$instance['images'][] = array(
 						'imgid'   => $new_instance['imgid'][ $key ],
-						'link'    => $new_instance['link'][ $key ],
+						'link'    => esc_url( $new_instance['link'][ $key ] ),
 						'target'  => $new_instance['target'][ $key ],
 						'geocode' => $new_instance['geocode'][ $key ],
 					);
@@ -126,13 +131,13 @@ class Widget extends \WP_Widget {
 		$images = ( ! empty( $instance['images'] ) && is_array( $instance['images'] ) ) ? $instance['images'] : array();
 
 		$html = '<p>
-					<label for="' . esc_attr( $this->get_field_id( 'title' ) ) . '">' . __( 'Title:', 'banner-adsense' ) . '</label>
-					<input id="' . esc_attr( $this->get_field_id( 'title' ) ) . '" name="' . esc_attr( $this->get_field_name( 'title' ) ) . '" type="text" value="' . esc_attr( $title ) . '" class="widefat" />
-				</p>';
+			<label for="' . esc_attr( $this->get_field_id( 'title' ) ) . '">' . __( 'Title:', 'banner-adsense' ) . '</label>
+			<input id="' . esc_attr( $this->get_field_id( 'title' ) ) . '" name="' . esc_attr( $this->get_field_name( 'title' ) ) . '" type="text" value="' . esc_html( $title ) . '" class="widefat" />
+		</p>';
 
 		$html .= '<p>
-			<label for="' . esc_attr( $this->get_field_id( 'script' ) ) . '">' . __( 'Script:', 'banner-adsense' ) . '</label>
-			<textarea id="' . esc_attr( $this->get_field_id( 'script' ) ) . '" name="' . esc_attr( $this->get_field_name( 'script' ) ) . '"  class="widefat">' . esc_attr( $script ) . '</textarea>
+			<label for="' . esc_attr( $this->get_field_id( 'script' ) ) . '">' . __( 'Script Url:', 'banner-adsense' ) . '</label>
+			<input id="' . esc_attr( $this->get_field_id( 'script' ) ) . '" name="' . esc_attr( $this->get_field_name( 'script' ) ) . '" type="text" value="' . esc_url( $script ) . '" class="widefat"/>
 		</p>';
 
 		$html .= '<hr style="margin:1.6rem 0;">';
@@ -189,8 +194,8 @@ class Widget extends \WP_Widget {
 		$html[] = '<option ' . $target . ' value="_blank">' . __( 'New Window', 'banner-adsense' ) . '</option>';
 		$html[] = '</select></p>';
 
-		$html[] = '<p><label>' . __( 'Script:', 'banner-adsense' ) . '</label>';
-		$html[] = '<textarea name="' . $this->get_field_name( 'geocode' ) . '[]" class="widefat">' . $geocode . '</textarea></p>';
+		$html[] = '<p><label>' . __( 'Script Url:', 'banner-adsense' ) . '</label>';
+		$html[] = '<input name="' . $this->get_field_name( 'geocode' ) . '[]" type="text" value="' . esc_url( $geocode ) . '" class="widefat"/></p>';
 
 		$html[] = '<p><button type="button" class="button media-select-btn">' . __( 'Add / Edit Image', 'banner-adsense' ) . '</button>&nbsp;<button type="button" class="button remove-banner-adsense-image">' . __( 'Remove Image', 'banner-adsense' ) . '</button></p>';
 

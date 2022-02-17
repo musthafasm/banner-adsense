@@ -162,6 +162,14 @@ class Banner_Adsense {
 		// Initialise widget.
 		add_action( 'widgets_init', array( $this, 'widgets_init' ) );
 
+		// Append scripts.
+		add_action( 'wp_head', array( $this, 'append_header_script' ) );
+		add_action( 'wp_footer', array( $this, 'append_footer_script' ) );
+
+		if ( function_exists( 'wp_body_open' ) ) {
+			add_action( 'wp_body_open', array( $this, 'append_body_script' ) );
+		}
+
 		return $this;
 	}
 
@@ -171,6 +179,9 @@ class Banner_Adsense {
 	 * @return self
 	 */
 	public function admin_init() {
+
+		// Initialise admin settings.
+		( new Admin_Settings() )->init( $this->get_basename() );
 
 		// Enque scripts and style.
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
@@ -218,6 +229,67 @@ class Banner_Adsense {
 		);
 
 		wp_enqueue_script( 'banner-adsense-admin' );
+	}
+
+	/**
+	 * Append the header scripts.
+	 *
+	 * @return void
+	 */
+	public function append_header_script() {
+		$this->render_output( 'headscript' );
+	}
+
+	/**
+	 * Append the body scripts.
+	 *
+	 * @return void
+	 */
+	public function append_body_script() {
+		$this->render_output( 'bodyscript' );
+	}
+
+	/**
+	 * Append the footer scripts.
+	 *
+	 * @return void
+	 */
+	public function append_footer_script() {
+		$this->render_output( 'footerscript' );
+	}
+
+	/**
+	 * Outputs the given section.
+	 *
+	 * @param string $section The section name head, body or footer.
+	 * @return void
+	 */
+	private function render_output( $section ) {
+		// Ignore admin, feed, robots or trackbacks.
+		if ( is_admin() || is_feed() || is_robots() || is_trackback() ) {
+			return;
+		}
+
+		if ( 'headscript' === $section && apply_filters( 'disable_banner_adsense_head', false ) ) {
+			return;
+		}
+
+		if ( 'bodyscript' === $section && apply_filters( 'disable_banner_adsense_body', false ) ) {
+			return;
+		}
+
+		if ( 'footerscript' === $section && apply_filters( 'disable_banner_adsense_footer', false ) ) {
+			return;
+		}
+
+		// Get the default values.
+		$options = get_option( 'banner_adsense_settings' );
+
+		if ( ! isset( $options[ $section ] ) || empty( trim( $options[ $section ] ) ) ) {
+			return;
+		}
+
+		echo wp_unslash( $options[ $section ] ); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**
